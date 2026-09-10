@@ -9,9 +9,19 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Blueprintable, BlueprintType, Abstract, Const)
 class PROJECTRAVENGRUB_API UItemDefinition : public UObject
 {
 	GENERATED_BODY()
+public:
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Display")
+	FText ItemName;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Display")
+	FText ItemDescription;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Display")
+	TObjectPtr<UTexture2D> ItemIcon;
 	
 };
