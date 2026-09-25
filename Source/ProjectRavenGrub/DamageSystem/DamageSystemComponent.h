@@ -7,6 +7,8 @@
 #include "DamageSystemTypes.h"
 #include "DamageSystemComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDamageTaken, const FDamageInfo&, DamageInfo);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDeath);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class PROJECTRAVENGRUB_API UDamageSystemComponent : public UActorComponent
@@ -17,7 +19,7 @@ public:
 	// Sets default values for this component's properties
 	UDamageSystemComponent();
 	
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 	float MaxHealth = 100.0f;
 	
 private:
@@ -68,6 +70,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "States")
 	void SetIsMoreVulnerable(bool NewMoreVulnerable) { IsMoreVulnerable = NewMoreVulnerable; }
 
+	UFUNCTION(BlueprintCallable, Category = "Health")
+	void SetStartingHealth(float StartingHealth);
+
 	
+	// Delegates
+	UPROPERTY(BlueprintAssignable, Category = "Damage Delegates")
+	FOnDamageTaken OnDamageTaken;
+
+	UPROPERTY(BlueprintAssignable, Category = "Damage Delegates")
+	FOnDeath OnDeath;
 	
 };
