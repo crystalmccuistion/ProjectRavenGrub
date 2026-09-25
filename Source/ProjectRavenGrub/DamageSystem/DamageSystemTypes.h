@@ -23,7 +23,7 @@ public:
 	float DamageAmount;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
-	float StaggerAmount;
+	float PoiseCost;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
 	AActor* DamageCauser;
