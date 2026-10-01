@@ -30,8 +30,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Item Stats", meta = (Categories = "Item.Stat"))
 	void SetStatValue(FGameplayTag StatTag, float StatValue);
 	
-	UFUNCTION(BlueprintCallable, Category = "Item Instance")
-	void Initialize(TSubclassOf<UItemDefinition> ItemDef);
+	UFUNCTION(BlueprintCallable, Category = "Item Instance", meta = (AutoCreateRefTerm = "InitialStats"))
+	void Initialize(TSubclassOf<UItemDefinition> ItemDef, const TMap<FGameplayTag, float>& InitialStats);
 	
 	UFUNCTION(BlueprintCallable, BlueprintPure, meta = (DeterminesOutputType = "FragmentClass"))
 	const UInventoryItemFragment* FindFragmentByClass(const TSubclassOf<UInventoryItemFragment> FragmentClass);
