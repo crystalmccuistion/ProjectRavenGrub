@@ -14,6 +14,6 @@ class PROJECTRAVENGRUB_API UItemAction : public UObject
 {
 	GENERATED_BODY()
 public: 
-	UFUNCTION(BlueprintImplementable)
+	UFUNCTION(BlueprintImplementableEvent)
 	bool Execute(AActor* ItemOwner);
 };
