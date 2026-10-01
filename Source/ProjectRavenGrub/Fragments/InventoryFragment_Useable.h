@@ -6,6 +6,7 @@
 #include "InventoryItemFragment.h"
 #include "InventoryFragment_Useable.generated.h"
 
+class UItemAction;
 /**
  * 
  */
@@ -13,4 +14,13 @@ UCLASS()
 class PROJECTRAVENGRUB_API UInventoryFragment_Useable : public UInventoryItemFragment
 {
 	GENERATED_BODY()
+public:
+	UFUNCTION(BlueprintCallable)
+	bool Use(AActor* ItemOwner);
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Options")
+	bool bConsumeOnUse = true;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Instanced, Category = "Actions")
+	TArray<TObjectPtr<UItemAction>> OnUseActions;
 };
