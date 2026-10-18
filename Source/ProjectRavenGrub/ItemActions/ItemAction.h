@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "ItemAction.generated.h"
 
+class UItemInstance;
 /**
  * 
  */
@@ -15,5 +16,5 @@ class PROJECTRAVENGRUB_API UItemAction : public UObject
 	GENERATED_BODY()
 public: 
 	UFUNCTION(BlueprintImplementableEvent)
-	bool Execute(AActor* ItemOwner);
+	bool Execute(AActor* ItemOwner, UItemInstance* ItemInstance);
 };

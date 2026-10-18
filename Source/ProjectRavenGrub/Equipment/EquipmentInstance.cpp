@@ -3,14 +3,49 @@
 
 #include "EquipmentInstance.h"
 
-void UEquipmentInstance::Initialize(UItemInstance* ItemInstance)
+#include "EquipmentDefinition.h"
+#include "GameFramework/Character.h"
+#include "ProjectRavenGrub/Fragments/InventoryFragment_Equippable.h"
+#include "ProjectRavenGrub/Items/ItemInstance.h"
+
+void UEquipmentInstance::Initialize(UItemInstance* ItemInstance, ACharacter* Character)
 {
+	if (!ItemInstance) return;
+	
+	SourceItemInstance = ItemInstance;
+	
+	const UInventoryFragment_Equippable* EquippableFragment =  Cast<UInventoryFragment_Equippable>(
+		ItemInstance->FindFragmentByClass(UInventoryFragment_Equippable::StaticClass())
+		);
+	
+	if (!EquippableFragment) return;
+	
+	EquipmentDefinition = EquippableFragment->EquipmentDefinition;
+	HandleEquipItem(Character);
 }
 
 void UEquipmentInstance::HandleEquipItem(ACharacter* Character)
 {
+	UEquipmentDefinition* DefinitionCDO = EquipmentDefinition.GetDefaultObject();
+	
+	if (!DefinitionCDO) return;
+	
+	SpawnedEquipmentActor = GetWorld()->SpawnActor(DefinitionCDO->EquipmentActorClass);
+	
+	if (!SpawnedEquipmentActor) return;
+	
+	SpawnedEquipmentActor->AttachToComponent(Character->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, DefinitionCDO->AttachSocketName);
+	
+	// Add stats/effects to character
+	// Keep track of stats
 }
 
 void UEquipmentInstance::HandleUnequipItem(ACharacter* Character)
 {
+	if (SpawnedEquipmentActor)
+	{
+		SpawnedEquipmentActor->Destroy();
+		SpawnedEquipmentActor = nullptr;
+	}
+	// Remove stats from character
 }

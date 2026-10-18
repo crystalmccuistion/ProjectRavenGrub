@@ -4,14 +4,15 @@
 #include "InventoryFragment_Useable.h"
 
 #include "ProjectRavenGrub/ItemActions/ItemAction.h"
+#include "ProjectRavenGrub/Items/ItemInstance.h"
 
-bool UInventoryFragment_Useable::Use(AActor* ItemOwner)
+bool UInventoryFragment_Useable::Use(AActor* ItemOwner, UItemInstance* ItemInstance)
 {
 	bool bAnySucceeded = false; 
 	
 	for (const TObjectPtr<UItemAction>& Action : OnUseActions)
 	{
-		if (Action && Action->Execute(ItemOwner))
+		if (Action && Action->Execute(ItemOwner, ItemInstance))
 		{
 			bAnySucceeded = true;
 		}
