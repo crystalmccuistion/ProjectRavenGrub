@@ -5,6 +5,7 @@
 
 #include "EquipmentDefinition.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "ProjectRavenGrub/Fragments/InventoryFragment_Equippable.h"
 #include "ProjectRavenGrub/Items/ItemInstance.h"
 
@@ -36,8 +37,9 @@ void UEquipmentInstance::HandleEquipItem(ACharacter* Character)
 	
 	SpawnedEquipmentActor->AttachToComponent(Character->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, DefinitionCDO->AttachSocketName);
 	
-	// Add stats/effects to character
-	// Keep track of stats
+	float WeaponAttackPower = SourceItemInstance-> GetStatValue(FGameplayTag::RequestGameplayTag(FName("Item.Stat.AttackPower")));
+	
+	Character->GetCharacterMovement()->MaxWalkSpeed += WeaponAttackPower;
 }
 
 void UEquipmentInstance::HandleUnequipItem(ACharacter* Character)
@@ -47,5 +49,8 @@ void UEquipmentInstance::HandleUnequipItem(ACharacter* Character)
 		SpawnedEquipmentActor->Destroy();
 		SpawnedEquipmentActor = nullptr;
 	}
-	// Remove stats from character
+	
+	float WeaponAttackPower = SourceItemInstance-> GetStatValue(FGameplayTag::RequestGameplayTag(FName("Item.Stat.AttackPower")));
+	
+	Character->GetCharacterMovement()->MaxWalkSpeed -= WeaponAttackPower;
 }
