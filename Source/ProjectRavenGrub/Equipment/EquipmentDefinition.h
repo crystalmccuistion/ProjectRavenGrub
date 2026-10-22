@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "UObject/Object.h"
 #include "EquipmentDefinition.generated.h"
 
@@ -20,4 +21,7 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EquipmentActor")
 	FName AttachSocketName; 
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EquipmentSlot")
+	FGameplayTag SlotTag;
 };

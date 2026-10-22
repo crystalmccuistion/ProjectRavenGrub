@@ -38,8 +38,6 @@ void UEquipmentInstance::HandleEquipItem(ACharacter* Character)
 	SpawnedEquipmentActor->AttachToComponent(Character->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, DefinitionCDO->AttachSocketName);
 	
 	float WeaponAttackPower = SourceItemInstance-> GetStatValue(FGameplayTag::RequestGameplayTag(FName("Item.Stat.AttackPower")));
-	
-	Character->GetCharacterMovement()->MaxWalkSpeed += WeaponAttackPower;
 }
 
 void UEquipmentInstance::HandleUnequipItem(ACharacter* Character)
@@ -52,5 +50,4 @@ void UEquipmentInstance::HandleUnequipItem(ACharacter* Character)
 	
 	float WeaponAttackPower = SourceItemInstance-> GetStatValue(FGameplayTag::RequestGameplayTag(FName("Item.Stat.AttackPower")));
 	
-	Character->GetCharacterMovement()->MaxWalkSpeed -= WeaponAttackPower;
 }
