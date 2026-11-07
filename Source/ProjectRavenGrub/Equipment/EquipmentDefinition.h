@@ -22,6 +22,6 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EquipmentActor")
 	FName AttachSocketName; 
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EquipmentSlot")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "EquipmentSlot", meta = (Categories = "Equipment.Slot"))
 	FGameplayTag SlotTag;
 };
