@@ -6,6 +6,7 @@
 #include "AbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "ProjectRavenGrub/AbilitySystem/AttributeSets/BasicAttributeSet.h"
 
 // Sets default values
 ACharacterBase::ACharacterBase()
@@ -35,6 +36,9 @@ ACharacterBase::ACharacterBase()
 	GetCharacterMovement()->MaxWalkSpeed = 380.0f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
+	
+	// Add basic attribute set
+	BasicAttributeSet = CreateDefaultSubobject<UBasicAttributeSet>(TEXT("BasicAttributeSet"));
 
 }
 
