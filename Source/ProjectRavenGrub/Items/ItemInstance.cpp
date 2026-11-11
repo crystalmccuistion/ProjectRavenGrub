@@ -37,7 +37,7 @@ void UItemInstance::Initialize(TSubclassOf<UItemDefinition> ItemDef, const TMap<
 
 const UInventoryItemFragment* UItemInstance::FindFragmentByClass(
 	const TSubclassOf<UInventoryItemFragment> FragmentClass)
-{
+ {
 	if (!FragmentClass) return nullptr;
 	
 	UItemDefinition* ItemCDO = ItemDefinition.GetDefaultObject();

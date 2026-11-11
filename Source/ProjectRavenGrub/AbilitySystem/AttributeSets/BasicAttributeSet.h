@@ -45,4 +45,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
 	FGameplayAttributeData AscMaxPoise;
 	ATTRIBUTE_ACCESSORS_BASIC(UBasicAttributeSet, AscMaxPoise)
+	
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+	
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 };
