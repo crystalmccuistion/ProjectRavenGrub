@@ -16,7 +16,7 @@ class PROJECTRAVENGRUB_API UInventoryFragment_Useable : public UInventoryItemFra
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable)
-	bool Use(AActor* ItemOwner, UItemInstance* ItemInstance);
+	bool Use(AActor* ItemOwner, UItemInstance* ItemInstance, bool SuppressSound);
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Options")
 	bool bConsumeOnUse = true;
