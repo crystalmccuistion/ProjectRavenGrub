@@ -37,6 +37,9 @@ protected:
 	virtual void PossessedBy(AController* NewController) override;
 	
 	virtual void OnRep_PlayerState() override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AbilitySystem")
+	TArray<TSubclassOf<UGameplayAbility>> StartingAbilities;
 
 public:	
 	// Called every frame
@@ -48,4 +51,13 @@ public:
 	// Definition of GetAbilitySystemComponent function from AbilitySystemInterface
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
+	UFUNCTION(BlueprintCallable, Category = "AbilitySystem")
+	TArray<FGameplayAbilitySpecHandle> GrantAbilities(TArray<TSubclassOf<UGameplayAbility>> AbilitiesToGrant);
+	
+	UFUNCTION(BlueprintCallable, Category = "AbilitySystem")
+	void RemoveAbilities(TArray<FGameplayAbilitySpecHandle> AbilityHandlesToRemove);
+	
+	UFUNCTION(BlueprintCallable, Category = "AbilitySystem")
+	void SendAbilitiesChangedEvent();
+	
 };
