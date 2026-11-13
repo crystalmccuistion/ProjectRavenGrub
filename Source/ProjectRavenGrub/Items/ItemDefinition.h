@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "UObject/Object.h"
 #include "ItemDefinition.generated.h"
 
@@ -24,6 +25,9 @@ public:
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Display")
 	TObjectPtr<UTexture2D> ItemIcon;
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Display")
+	FGameplayTagContainer ItemType;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Instanced, Category = "Fragments Array")
 	TArray<TObjectPtr<UInventoryItemFragment>> Fragments;
