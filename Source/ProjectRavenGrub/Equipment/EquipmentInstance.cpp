@@ -35,6 +35,8 @@ void UEquipmentInstance::HandleEquipItem(ACharacter* Character)
 	
 	if (!SpawnedEquipmentActor) return;
 	
+	SpawnedEquipmentActor->SetInstigator(Character);
+	
 	SpawnedEquipmentActor->AttachToComponent(Character->GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, DefinitionCDO->AttachSocketName);
 	
 	float WeaponAttackPower = SourceItemInstance-> GetStatValue(FGameplayTag::RequestGameplayTag(FName("Item.Stat.AttackPower")));
