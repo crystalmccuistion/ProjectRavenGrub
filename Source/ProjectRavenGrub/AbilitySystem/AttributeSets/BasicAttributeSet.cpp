@@ -26,6 +26,9 @@ void UBasicAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute,
 	} else if (Attribute == GetAscStaminaAttribute())
 	{
 		NewValue = FMath::Clamp(NewValue, -100.0f, GetAscMaxStamina());
+	} else if (Attribute == GetAscPoiseAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.0f, GetAscMaxPoise());
 	}
 }
 
@@ -40,5 +43,17 @@ void UBasicAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectM
 	else if (Data.EvaluatedData.Attribute == GetAscStaminaAttribute())
 	{
 		SetAscStamina(GetAscStamina());
+	}
+	else if (Data.EvaluatedData.Attribute == GetAscPoiseAttribute())
+	{
+		SetAscPoise(GetAscPoise());
+		if (GetAscPoise() == 0.0f)
+		{
+			FGameplayTagContainer HitReactTagContainer; 
+			HitReactTagContainer.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Animation.HitReaction")));
+			GetOwningAbilitySystemComponent()->TryActivateAbilitiesByTag(HitReactTagContainer);
+			SetAscPoise(GetAscMaxPoise());
+		}
+
 	}
 }
