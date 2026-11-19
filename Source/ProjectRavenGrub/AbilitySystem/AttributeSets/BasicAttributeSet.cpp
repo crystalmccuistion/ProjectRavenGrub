@@ -50,10 +50,22 @@ void UBasicAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectM
 		if (GetAscPoise() == 0.0f)
 		{
 			FGameplayTagContainer HitReactTagContainer; 
-			HitReactTagContainer.AddTag(FGameplayTag::RequestGameplayTag(FName("Ability.Animation.HitReaction")));
+			HitReactTagContainer.AddTag(FGameplayTag::RequestGameplayTag("Ability.Animation.HitReaction"));
 			GetOwningAbilitySystemComponent()->TryActivateAbilitiesByTag(HitReactTagContainer);
 			SetAscPoise(GetAscMaxPoise());
 		}
 
+	}
+}
+
+void UBasicAttributeSet::PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue)
+{
+	Super::PostAttributeChange(Attribute, OldValue, NewValue);
+	
+	if (Attribute == GetAscHealthAttribute() && NewValue <= 0.f)
+	{
+		FGameplayTagContainer DeathTagContainer; 
+		DeathTagContainer.AddTag(FGameplayTag::RequestGameplayTag("Ability.Death"));
+		GetOwningAbilitySystemComponent()->TryActivateAbilitiesByTag(DeathTagContainer);
 	}
 }
